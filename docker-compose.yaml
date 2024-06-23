@@ -37,7 +37,7 @@ services:
     image: devops-fullstack-app-frontend:latest
     environment:
       - HOST=0.0.0.0
-      - REACT_APP_SERVER_URL=http://localhost:8080/employees  
+      - REACT_APP_SERVER_URL=http://backend:8080/employees  
     ports:
       - "3000:3000"
     volumes:
