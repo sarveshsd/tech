@@ -34,6 +34,7 @@ jobs:
         docker push ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-frontend
         docker push ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-backend
         docker push ${{ secrets.DOCKER_USERNAME }}/postgres:13
+        docker-compose down
 
     - name: Install Minikube
       run: |
