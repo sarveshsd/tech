@@ -55,9 +55,13 @@ jobs:
 
     - name: Wait for pods to be ready
       run: |
-        kubectl wait --for=condition=Ready pod -l app=frontend --timeout=300s
-        kubectl wait --for=condition=Ready pod -l app=backend --timeout=300s
-        kubectl wait --for=condition=Ready pod -l app=postgres --timeout=300s
+        # Loop to wait until pods are created and ready
+        for deployment in frontend backend postgres; do
+          while [[ $(kubectl get pods -l app=$deployment -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
+            echo "Waiting for $deployment pods to be ready..."
+            sleep 10
+          done
+        done
 
     - name: Port-forward after pods are ready
       run: |
