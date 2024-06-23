@@ -52,11 +52,12 @@ jobs:
         kubectl apply -f kubernetes/frontend-deployment.yaml
         kubectl apply -f kubernetes/backend-deployment.yaml
         kubectl apply -f kubernetes/postgres-deployment.yaml
-        
+
     - name: Port-forward after pods are ready
       run: |
         chmod +x kubernetes/deploy.sh
-        ./kubernetes/deploy.sh
+        sleep 60
+        ./kubernetes/deploy.sh &
 
     - name: Verify deployment
       run: |
