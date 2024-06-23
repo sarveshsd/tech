@@ -18,6 +18,8 @@ spec:
           env:
             - name: REACT_APP_SERVER_URL
               value: "http://backend:8080/employees"
+            - name: HOST
+              value: 0.0.0.0
           ports:
             - containerPort: 3000
 ---
