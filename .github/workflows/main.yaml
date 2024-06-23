@@ -55,9 +55,12 @@ jobs:
 
     - name: Port-forward after pods are ready
       run: |
-        chmod +x kubernetes/deploy.sh
+        #chmod +x kubernetes/deploy.sh
         sleep 60
-        ./kubernetes/deploy.sh &
+        #./kubernetes/deploy.sh &
+        kubectl port-forward --address 0.0.0.0 svc/frontend 3000:80 &
+        kubectl port-forward --address 0.0.0.0 svc/backend 8080:8080 &
+        kubectl port-forward --address 0.0.0.0 svc/postgres 5432:5432 &
 
     - name: Verify deployment
       run: |
