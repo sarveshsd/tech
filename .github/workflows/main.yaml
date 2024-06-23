@@ -22,13 +22,14 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
+        docker-compose build
         docker-compose up -d
         docker tag devops-fullstack-app-frontend ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-frontend
         docker tag devops-fullstack-app-backend ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-backend
-        docker tag postgres ${{ secrets.DOCKER_USERNAME }}/postgres
+        docker tag postgres:13 ${{ secrets.DOCKER_USERNAME }}/postgres:13
         docker push ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-frontend
         docker push ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-backend
-        docker push ${{ secrets.DOCKER_USERNAME }}/postgres
+        docker push ${{ secrets.DOCKER_USERNAME }}/postgres:13
 
     - name: Install Minikube
       run: |
