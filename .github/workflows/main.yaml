@@ -42,7 +42,7 @@ jobs:
 
     - name: Start Minikube cluster
       run: |
-        sudo minikube start --vm-driver=docker --kubernetes-version=stable
+        sudo minikube start --driver=docker 
 
     - name: Deploy to Minikube
       run: |
