@@ -6,4 +6,3 @@ kubectl port-forward --address 0.0.0.0 svc/postgres 5432:5432 &
 
 echo "All pods are running. Continuing with pipeline..."
 
-wait
