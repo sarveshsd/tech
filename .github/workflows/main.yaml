@@ -61,8 +61,8 @@ jobs:
     - name: Port-forward after pods are ready
       run: |
         sleep 120
-        chmod +x kubernetes/1.sh
-        ./kubernetes/1.sh
+        chmod +x kubernetes/deploy.sh
+        ./kubernetes/deploy.sh
 
     - name: Verify deployment
       run: |
