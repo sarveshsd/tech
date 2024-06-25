@@ -21,6 +21,11 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
+    - name: Kill running ports
+      run: |
+        chmod +x kubernetes/1.sh
+        ./kubernetes/1.sh
+
     - name: Build and push Docker images
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -55,10 +60,9 @@ jobs:
 
     - name: Port-forward after pods are ready
       run: |
-        sleep 180
-        kubectl port-forward --address 0.0.0.0 svc/frontend 3000:80 &
-        kubectl port-forward --address 0.0.0.0 svc/backend 8080:8080 &
-        kubectl port-forward --address 0.0.0.0 svc/postgres 5432:5432 &
+        sleep 120
+        chmod +x kubernetes/deploy.sh
+        ./kubernetes/deploy.sh
 
     - name: Verify deployment
       run: |
