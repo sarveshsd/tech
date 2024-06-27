@@ -21,11 +21,6 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Kill running ports
-      run: |
-        chmod +x kubernetes/1.sh
-        ./kubernetes/1.sh
-
     - name: Build and push Docker images
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
