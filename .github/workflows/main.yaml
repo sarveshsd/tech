@@ -21,11 +21,17 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
     
-    - name: Clear Occupied Ports
+    - name: Install Minikube
       run: |
-        chmod +x kubernetes/1.sh
-        ./kubernetes/1.sh 
+        curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        sudo install minikube /usr/local/bin/
 
+    - name: Start Minikube cluster
+      run: |
+        minikube stop 
+        minikube delete
+        minikube start --driver=docker 
+     
     - name: Build and push Docker images
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -40,17 +46,6 @@ jobs:
         docker push ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-backend
         docker push ${{ secrets.DOCKER_USERNAME }}/postgres:13
         docker-compose down
-
-    - name: Install Minikube
-      run: |
-        curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-        sudo install minikube /usr/local/bin/
-
-    - name: Start Minikube cluster
-      run: |
-        minikube stop 
-        minikube delete
-        minikube start --driver=docker 
 
     - name: Deploy to Minikube
       run: |
