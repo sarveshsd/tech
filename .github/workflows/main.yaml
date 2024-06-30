@@ -8,23 +8,24 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: self-hosted
-
-    steps:
-    - name: Adjust file permissions
-      run: |
-        sudo chown -R $USER:$USER /home/ubuntu/actions-runner/_work/tech/tech
+    runs-on: self-hosteda
 
     - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
-
-    - name: Kill running ports
+    
+    - name: Install Minikube
       run: |
-        chmod +x kubernetes/1.sh
-        ./kubernetes/1.sh
+        curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        chmod +x minikube
+        sudo mv minikube /usr/local/bin/
+
+    - name: Start Minikube cluster
+      run: |
+        minikube stop 
+        minikube start --driver=docker 
 
     - name: Build and push Docker images
       env:
@@ -40,11 +41,6 @@ jobs:
         docker push ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-backend:v1
         docker push ${{ secrets.DOCKER_USERNAME }}/postgres:13
         docker-compose down
-
-    - name: Start Minikube cluster
-      run: |
-        minikube stop 
-        minikube start --driver=docker 
 
     - name: Deploy to Minikube
       run: |
