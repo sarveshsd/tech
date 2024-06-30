@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Adjust file permissions
       run: |
-        sudo chown -R $USER:$USER /home/ubuntu/actions-runner/_work/tech/tech
+        sudo chown -R $USER:$USER /home/ubuntu/actions-runner/_work/tech
 
     - name: Checkout repository
       uses: actions/checkout@v2
