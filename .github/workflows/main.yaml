@@ -25,14 +25,7 @@ jobs:
         sudo systemctl start docker
         sudo systemctl enable docker
         sudo usermod -aG docker $USER
-        
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-      with:
-        driver-opts: |
-          network=host
-          security-opt=label=disable
-    
+         
     - name: Install Minikube
       run: |
         curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
