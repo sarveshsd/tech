@@ -40,11 +40,11 @@ jobs:
       run: |
         docker-compose down
         docker-compose up -d
-        docker tag devops-fullstack-app-frontend:v1 ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-frontend
-        docker tag devops-fullstack-app-backend:v1 ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-backend
+        docker tag devops-fullstack-app-frontend ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-frontend
+        docker tag devops-fullstack-app-backend ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-backend
         docker tag postgres:13 ${{ secrets.DOCKER_USERNAME }}/postgres:13
-        docker push ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-frontend@tag
-        docker push ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-backend@tag
+        docker push ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-frontend
+        docker push ${{ secrets.DOCKER_USERNAME }}/devops-fullstack-app-backend
         docker push ${{ secrets.DOCKER_USERNAME }}/postgres:13
         docker-compose down
 

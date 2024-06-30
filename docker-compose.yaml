@@ -17,7 +17,7 @@ services:
     build:
       context: ./backend
     #container_name: go_app
-    image: devops-fullstack-app-backend:v1
+    image: devops-fullstack-app-backend
     environment:
       DB_HOST: db
       DB_USER: root
@@ -34,7 +34,7 @@ services:
     build:
       context: ./frontend
     #container_name: react_app
-    image: devops-fullstack-app-frontend:v1
+    image: devops-fullstack-app-frontend
     environment:
       - HOST=0.0.0.0
       - REACT_APP_SERVER_URL=http://34.30.207.18:8080/employees
