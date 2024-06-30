@@ -34,7 +34,7 @@ jobs:
 
     - name: Start Minikube cluster
       run: |
-        minikube stop 
+        minikube delete
         minikube start --driver=docker 
 
     - name: Build and push Docker images
